@@ -2,6 +2,7 @@ let video;
 let poseNet;
 let poses = [];
 let time=0;
+
 function setup() {
   createCanvas(640, 480);
   video = createCapture(VIDEO);
@@ -30,8 +31,12 @@ function draw() {
   scale(-1, 1);
   //draw video capture feed as image inside p5 canvas
   image(video, 0, 0);
-  fill(0, 255, 0);
-  circle(100,100,80);
+  fill('rgba(0, 255, 0,0.25)');
+  square(220,0,200)
+  square(0,140,200)
+  square(440,140,200)
+  square(220,280,200)
+
   // We can call both functions to draw all keypoints and the skeletons
   drawKeypoints();
   drawSkeleton();
@@ -47,25 +52,50 @@ function drawKeypoints()  {
       // A keypoint is an object describing a body part (like rightArm or leftShoulder)
       // let keypoint = pose.keypoints[j];
       // Only draw an ellipse is the pose probability is bigger than 0.2
-      if (pose.nose.confidence > 0.2||pose.rightWrist.confidence>0.2) {
+      if (pose.nose.confidence > 0.2) {
         // console.log(poses)
+        let eyeR = pose.rightEye;
+        let eyeL = pose.leftEye;
+
         fill(255, 0, 0);
         noStroke();
         ellipse(pose.nose.x, pose.nose.y, 30);
-        ellipse(pose.leftWrist.x, pose.leftWrist.y, 30);
-        ellipse(pose.rightWrist.x, pose.rightWrist.y, 30);
-        if(pose.nose.x>20&&pose.nose.x<180&&pose.nose.y>20&&pose.nose.y<180&&time==0){
-          time = setTimeout(()=>{
-            var sound = new Howl({
-              src: ['sounds/base.mp3'],
-              onend: function() {
-                console.log('Finished!');
-              }
-            });
-            sound.play();
-            time=0
-          },1000)
-        }
+        // ellipse(pose.leftWrist.x, pose.leftWrist.y, 30);
+        // ellipse(pose.rightWrist.x, pose.rightWrist.y, 30);
+        // if(pose.nose.x>20&&pose.nose.x<180&&pose.nose.y>20&&pose.nose.y<180&&time==0){
+        //   time = setTimeout(()=>{
+        //     var sound = new Howl({
+        //       src: ['sounds/base.mp3'],
+        //       onend: function() {
+        //         console.log('Finished!');
+        //       }
+        //     });
+        //     sound.play();
+        //     time=0
+        //   },1000)
+        // }
+        if(pose.nose.x>220&&pose.nose.x<420&&pose.nose.y>0&&pose.nose.y<200){
+          console.log('up');
+          if (lastInputDirection.y !== 0) {}
+           else inputDirection = { x: 0, y: -1 }
+         }
+         else if(pose.nose.x>220&&pose.nose.x<420&&pose.nose.y<480&&pose.nose.y>280){
+          console.log('down');
+          if (lastInputDirection.y !== 0) {}
+          else inputDirection = { x: 0, y: 1 }
+          
+         }
+         else if(pose.nose.x>0&&pose.nose.x<200&&pose.nose.y<340&&pose.nose.y>140){
+          console.log('right');
+          if (lastInputDirection.x !== 0) {}
+          else inputDirection = { x: 1, y: 0 }
+     
+         }
+         else if(pose.nose.x>440&&pose.nose.x<640&&pose.nose.y>140&&pose.nose.y<340){
+          console.log('left');
+          if (lastInputDirection.x !== 0){}
+          else inputDirection = { x: -1, y: 0 }
+         }
       }
     }
   }
