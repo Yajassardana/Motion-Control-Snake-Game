@@ -2,8 +2,8 @@ const GRID_SIZE = 15
 
 export function randomGridPosition() {
   return {
-    x: Math.floor(Math.random() * (GRID_SIZE-2)) + 2,
-    y: Math.floor(Math.random() * (GRID_SIZE-2)) + 2
+    x: Math.floor(Math.random() * (GRID_SIZE-3)) + 2,
+    y: Math.floor(Math.random() * (GRID_SIZE-3)) + 2
   }
 }
 

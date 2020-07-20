@@ -78,23 +78,34 @@ function drawKeypoints()  {
           console.log('up');
           if (lastInputDirection.y !== 0) {}
            else inputDirection = { x: 0, y: -1 }
+           fill('rgba(0, 255, 0,1)');
+           square(220,0,200)
          }
          else if(pose.nose.x>220&&pose.nose.x<420&&pose.nose.y<480&&pose.nose.y>280){
           console.log('down');
           if (lastInputDirection.y !== 0) {}
           else inputDirection = { x: 0, y: 1 }
+          fill('rgba(0, 255, 0,1)');
+          square(220,280,200)
+          
           
          }
          else if(pose.nose.x>0&&pose.nose.x<200&&pose.nose.y<340&&pose.nose.y>140){
           console.log('right');
           if (lastInputDirection.x !== 0) {}
           else inputDirection = { x: 1, y: 0 }
-     
+          fill('rgba(0, 255, 0,1)');
+          square(0,140,200)
+
          }
          else if(pose.nose.x>440&&pose.nose.x<640&&pose.nose.y>140&&pose.nose.y<340){
           console.log('left');
           if (lastInputDirection.x !== 0){}
           else inputDirection = { x: -1, y: 0 }
+          fill('rgba(0, 255, 0,1)');
+          square(440,140,200)
+
+
          }
       }
     }
