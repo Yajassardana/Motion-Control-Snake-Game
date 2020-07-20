@@ -7,7 +7,7 @@ function setup() {
   createCanvas(640, 480);
   video = createCapture(VIDEO);
   video.size(width, height);
-  console.log(video.width,video.height);
+  // console.log(video.width,video.height);
   // Create a new poseNet method with a single detection
   poseNet = ml5.poseNet(video,console.log('ready'));
   // This sets up an event that fills the global variable "poses"
@@ -39,7 +39,6 @@ function draw() {
 
   // We can call both functions to draw all keypoints and the skeletons
   drawKeypoints();
-  drawSkeleton();
 }
 
 // A function to draw ellipses over the detected keypoints
@@ -60,69 +59,40 @@ function drawKeypoints()  {
         fill(255, 0, 0);
         noStroke();
         ellipse(pose.nose.x, pose.nose.y, 30);
-        // ellipse(pose.leftWrist.x, pose.leftWrist.y, 30);
-        // ellipse(pose.rightWrist.x, pose.rightWrist.y, 30);
-        // if(pose.nose.x>20&&pose.nose.x<180&&pose.nose.y>20&&pose.nose.y<180&&time==0){
-        //   time = setTimeout(()=>{
-        //     var sound = new Howl({
-        //       src: ['sounds/base.mp3'],
-        //       onend: function() {
-        //         console.log('Finished!');
-        //       }
-        //     });
-        //     sound.play();
-        //     time=0
-        //   },1000)
-        // }
         if(pose.nose.x>220&&pose.nose.x<420&&pose.nose.y>0&&pose.nose.y<200){
-          console.log('up');
+          // console.log('up');
           if (lastInputDirection.y !== 0) {}
            else inputDirection = { x: 0, y: -1 }
-           fill('rgba(0, 255, 0,1)');
+           fill('rgba(0, 255, 0,0.5)');
            square(220,0,200)
          }
          else if(pose.nose.x>220&&pose.nose.x<420&&pose.nose.y<480&&pose.nose.y>280){
-          console.log('down');
+          // console.log('down');
           if (lastInputDirection.y !== 0) {}
           else inputDirection = { x: 0, y: 1 }
-          fill('rgba(0, 255, 0,1)');
+          fill('rgba(0, 255, 0,0.5)');
           square(220,280,200)
           
           
          }
          else if(pose.nose.x>0&&pose.nose.x<200&&pose.nose.y<340&&pose.nose.y>140){
-          console.log('right');
+          // console.log('right');
           if (lastInputDirection.x !== 0) {}
           else inputDirection = { x: 1, y: 0 }
-          fill('rgba(0, 255, 0,1)');
+          fill('rgba(0, 255, 0,0.5)');
           square(0,140,200)
 
          }
          else if(pose.nose.x>440&&pose.nose.x<640&&pose.nose.y>140&&pose.nose.y<340){
-          console.log('left');
+          // console.log('left');
           if (lastInputDirection.x !== 0){}
           else inputDirection = { x: -1, y: 0 }
-          fill('rgba(0, 255, 0,1)');
+          fill('rgba(0, 255, 0,0.5)');
           square(440,140,200)
 
 
          }
       }
-    }
-  }
-}
-
-// A function to draw the skeletons
-function drawSkeleton() {
-  // Loop through all the skeletons detected
-  for (let i = 0; i < poses.length; i++) {
-    let skeleton = poses[i].skeleton;
-    // For every skeleton, loop through all body connections
-    for (let j = 0; j < skeleton.length; j++) {
-      let partA = skeleton[j][0];
-      let partB = skeleton[j][1];
-      stroke(255, 0, 0);
-      line(partA.position.x, partA.position.y, partB.position.x, partB.position.y);
     }
   }
 }
