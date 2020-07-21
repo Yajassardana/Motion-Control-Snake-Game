@@ -1,0 +1,24 @@
+    
+    #game-board {
+      background-color: black;
+      width:100vmin;
+      height:100vmin;
+      display:grid;
+      grid-template-rows: repeat(15, 1fr);
+      grid-template-columns: repeat(15, 1fr);
+    }
+
+    .snake {
+      background-color: crimson;
+      border: .25vmin solid white;
+    }
+
+    .food {
+      background-color: hsl(50, 100%, 50%);
+      border: .25vmin solid white;
+    }
+    .p5Canvas{
+      position: fixed;
+      top: 0;
+      right: 0;
+    }
