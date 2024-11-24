@@ -13,4 +13,4 @@ A motion controlled version of the traditional Snake game made using **TensorFlo
 ## Local Setup
 #### 1 .Clone the repository using the command : `git clone https://github.com/Yajassardana/Motion-Control-Snake-Game.git` <br/>
 #### 2. Open index.html
-### Volia! You're good to go.
+### Volia! You're good to go
